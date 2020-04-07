@@ -12,12 +12,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import run.halo.app.model.dto.OptionAll;
 import run.halo.app.model.entity.Post;
 import run.halo.app.model.enums.PostStatus;
 import run.halo.app.model.vo.PostListVO;
 import run.halo.app.service.OptionService;
 import run.halo.app.service.PostService;
 import run.halo.app.service.ThemeService;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.springframework.data.domain.Sort.Direction.DESC;
 
@@ -74,6 +78,11 @@ public class ContentIndexController {
                         }) Sort sort) {
         log.debug("Requested index page, sort info: [{}]", sort);
         int pageSize = optionService.getPostPageSize();
+        String blogTitle = optionService.getBlogTitle();
+        //Map<String,Object> optionsMap = new HashMap<>();
+        OptionAll options = new OptionAll();
+        //optionsMap.put("blog_title",blogTitle);
+        options.setBlog_title(blogTitle);
         Pageable pageable = PageRequest.of(page >= 1 ? page - 1 : page, pageSize, sort);
 
         Page<Post> postPage = postService.pageBy(PostStatus.PUBLISHED, pageable);
@@ -84,6 +93,9 @@ public class ContentIndexController {
         model.addAttribute("is_index", true);
         model.addAttribute("posts", posts);
         model.addAttribute("rainbow", rainbow);
+
+        model.addAttribute("blog_title",blogTitle);
+        model.addAttribute("options.blog_title",blogTitle);
         return themeService.render("index");
     }
 }

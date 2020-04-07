@@ -1,5 +1,5 @@
 server:
-  port: 8090
+  port: 8091
   use-forward-headers: true
   undertow:
     io-threads: 2
@@ -7,12 +7,16 @@ server:
     buffer-size: 1024
     directBuffers: true
   servlet:
+    context-path: /
     session:
       timeout: 86400s
   compression:
     enabled: true
     mime-types: application/javascript,text/css,application/json,application/xml,text/html,text/xml,text/plain
 spring:
+  freemarker:
+    settings:
+      classic_compatible: true
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
   devtools:
@@ -31,8 +35,8 @@ spring:
 
     # MySQL 配置
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/halodb?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
-    username: root
+    url: jdbc:mysql://gz-cdb-039h75dd.sql.tencentcdb.com:63681/halodb?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: wjf
     password: 051388698738wjf
 
   h2:
@@ -57,3 +61,4 @@ logging:
   level:
     run.halo.app: INFO
   path: ${user.home}/.halo/logs
+

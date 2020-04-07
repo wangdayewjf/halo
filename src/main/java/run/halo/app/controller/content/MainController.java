@@ -32,6 +32,11 @@ public class MainController {
         this.optionService = optionService;
     }
 
+    @GetMapping("/dailyStatistic")
+    public String dailyStatistic() {
+        return "redirect:/admin/dailyStatistic.html";
+    }
+
     @GetMapping("/admin")
     public String admin() {
         return "redirect:/admin/index.html";

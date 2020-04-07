@@ -1,8 +1,8 @@
 FROM openjdk:8-jre-alpine
 
 VOLUME /tmp
-
-ARG JAR_FILE=build/libs/halo.jar
+ARG PROJECT_VERSION=1.0.2
+ARG JAR_FILE=build/libs/halo-${PROJECT_VERSION}.jar
 ARG PORT=8090
 ARG TIME_ZONE=Asia/Shanghai
 
